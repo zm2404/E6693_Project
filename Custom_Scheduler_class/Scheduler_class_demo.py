@@ -43,7 +43,7 @@ class Scheduler:
         '''
         
         while True:
-            await asyncio.sleep(120)   # update every 2 minutes
+            await asyncio.sleep(60)   # update every 2 minutes (plus the 60s sleep in the end)
             if self.done_trials_num >= self.total_trials_num:
                 break
             #info = self.get_multiple_load(self.username, self.password)    # get the load of all the servers
@@ -73,6 +73,7 @@ class Scheduler:
             sorted_server_list = ranked_servers[:real_len]
             self.available_servers = sorted_server_list
             print(sorted_server_list)
+            await asyncio.sleep(60)
             if self.done_trials_num >= self.total_trials_num:
                 break
             #await asyncio.sleep(1800)   # update every 30 minutes
@@ -81,15 +82,19 @@ class Scheduler:
     def get_multiple_load(self, username, password) -> dict:
         info = {}
         for i in range(1,43):   # we have 42 servers
+            if self.done_trials_num >= self.total_trials_num:
+                break
             try:
                 if i < 10:
                     target = 'cadpc0' + str(i) + '.ee.columbia.edu'
                 else:
+                    if i == 14:
+                        raise Exception('Server 14 is not available.')
                     target = 'cadpc' + str(i) + '.ee.columbia.edu'
                 filename = 'load' + str(i) + '.txt'
                 load_info = self.get_single_load(username, password, target, filename)
                 info[i] = self.weighted_load(load_info['load'], load_info['cpu'])
-                #print('Done with ' + target)
+                print('Done with ' + target)
             except:
                 print('Error with ' + target)
         print('Done getting load info')
@@ -109,7 +114,7 @@ class Scheduler:
 
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())  # Automatically add the server's key
-        ssh_client.connect(target, username=username, password=password)
+        ssh_client.connect(target, username=username, password=password, timeout=10)
 
         stdin, stdout, stderr = ssh_client.exec_command('top -n 1 -b')	# change the command
         output = stdout.read().decode()
