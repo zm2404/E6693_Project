@@ -3,7 +3,7 @@ import asyncio
 from .Trial_class_demo import Trial
 
 class Optimizer:
-    def __init__(self, initial_trials_num, total_trials_num, param_space, random_initial:bool=True, utility_type:str='ucb', kappa:float=1.96, xi:float=0.01):
+    def __init__(self, initial_trials_num, total_trials_num, param_space, metrics, func_coeff, func_power=None, random_initial:bool=True, utility_type:str='ucb', kappa:float=1.96, xi:float=0.01):
         '''
         initial_trials_num: the number of trials we want to run at the beginning
         param_space: the space of parameters we want to optimize
@@ -20,12 +20,12 @@ class Optimizer:
         self.utility_type = utility_type
         self.kappa = kappa
         self.xi = xi
-        # self.metrics = metrics                          # the metrics used in the objective function
-        # self.func_coeff = func_coeff                    # the coefficients of the metrics
-        # if func_power is None:
-        #     self.func_power = [1]*len(metrics)
-        # else:
-        #     self.func_power = func_power                # the power of the metrics
+        self.metrics = metrics                          # the metrics used in the objective function
+        self.func_coeff = func_coeff                    # the coefficients of the metrics
+        if func_power is None:
+            self.func_power = [1]*len(metrics)
+        else:
+            self.func_power = func_power                # the power of the metrics
         #self.optimizer = BayesianOptimization(f=None, pbounds=param_space, verbose=2)
         #self.utility = UtilityFunction(kind=utility_type, kappa=kappa, xi=xi)
 
@@ -45,18 +45,20 @@ class Optimizer:
         '''
         define the black box function
         '''
-        trial = Trial(**param)
+        trial = Trial(param)
         if scheduler is None:
             result = await trial.run()
         else:
             result = await trial.run_remote(scheduler, pyfile=pyfile)
 
-        # # calculate the cost
-        # metrics = result[0]
-        # cost = 0
-        # for i in range(len(self.metrics)):
-        #     cost += self.func_coeff[i] * metrics[self.metrics[i]] ** self.func_power[i]
-        # result = (-1*cost, result[1])
+        if result is None:
+            return None, None
+
+        # calculate the cost
+        cost = 0
+        for i in range(len(self.metrics)):
+            cost += self.func_coeff[i] * (result[0][self.metrics[i]] ** self.func_power[i])
+        result = (-1*cost, result[1])
         self.done_trials_num += 1
         return result
 
@@ -70,6 +72,8 @@ class Optimizer:
         else:
             initial_points = initial_points
 
+        for param in initial_points:
+            print(param)
         trials = [asyncio.create_task(self.black_box_function(param, scheduler, pyfile)) for param in initial_points]
 
         while self.done_trials_num < self.total_trials_num:
@@ -87,7 +91,7 @@ class Optimizer:
                 if self.gend_trials_num < self.total_trials_num:
                     next_point = optimizer.suggest(utility)
                     next_point['trial_index'] = self.gend_trials_num
-                    new_task = asyncio.create_task(self.black_box_function(next_point, scheduler))
+                    new_task = asyncio.create_task(self.black_box_function(next_point, scheduler, pyfile))
                     self.gend_trials_num += 1
                     trials.append(new_task)
                 

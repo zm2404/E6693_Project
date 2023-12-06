@@ -5,11 +5,10 @@ import subprocess
 
 
 class Trial:
-    def __init__(self, alpha, beta, trial_index):
-        self.alpha = alpha
-        self.beta = beta
-        self.trial_index = trial_index
-        self.result = None
+    def __init__(self, param):
+        self.trial_index = param.pop('trial_index')
+        self.param = param
+        self.result = {}
 
     async def demo_run(self):
         time_delay = [5,10,15]
@@ -31,10 +30,14 @@ class Trial:
             return self.result, {"alpha":self.alpha,"beta":self.beta}
     
 
-    async def run_remote(self, scheduler, pyfile) -> tuple[list, dict]:
+    async def run_remote(self, scheduler, pyfile) -> tuple[dict, dict]:
         '''
         This function run the commend on remote machine.
         '''
+        args = ' '.join(f'--{key} {value}' for key, value in self.param.items())
+        command = f"python3 /user/stud/fall22/zm2404/E6693/project/{pyfile} {args} --index {self.trial_index}"
+        #print(command)
+
         retries = 5
         while retries > 0:
             while not scheduler.available_servers:
@@ -46,20 +49,23 @@ class Trial:
             try:
                 async with asyncssh.connect(host = target, username = scheduler.username, password = scheduler.password) as conn:
                     #command = "cd /user/stud/fall22/zm2404/E6693/project/;"
-                    command = f"python3 /user/stud/fall22/zm2404/E6693/project/{pyfile} --alpha {self.alpha} --beta {self.beta} --index {self.trial_index}"
+                    #command = f"python3 /user/stud/fall22/zm2404/E6693/project/{pyfile} --alpha {self.alpha} --beta {self.beta} --index {self.trial_index}"
                     result = await conn.run(command, check=True)
                     #print(result.stderr.strip())
-                    print(f'{target}: {result.stdout.strip()}', f'{self.alpha}, {self.beta}')
+                    print(f'{target}: {result.stdout.strip()}', f'{self.param}')
                     with open(f'./results/result_{self.trial_index}.txt', 'r') as file:
-                        self.result = float(file.read().split(':')[1])  # 具体读取方法再改
+                        for line in file:
+                            metric, value = line.split(':')
+                            self.result[metric] = float(value)
+                        #self.result = float(file.read().split(':')[1])  # 具体读取方法再改
                     scheduler.done_trials_num += 1
                     scheduler.available_servers.append(server)  # put the server back to the list
-                    return self.result, {"alpha":self.alpha,"beta":self.beta}
-            except:
-                print(f'Error with {target}')
+                    return self.result, self.param
+            except Exception as e:
+                print(f'Error with {target}: {e}')
                 retries -= 1
                 if len(scheduler.available_servers) == 0:
-                    scheduler.rank_servers()
+                    scheduler.first_rank_server()
 
         scheduler.done_trials_num += 1
         print('Failed to connect to the server after several retries')
