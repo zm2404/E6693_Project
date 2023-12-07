@@ -1,0 +1,73 @@
+
+
+Working Directory = /homes/user/stud/fall22/xf2247/ee6693/project/DA1
+QoS Summary for fpu_double
+==========================================================================================
+Metric                          generic         map             syn_opt         final          
+==========================================================================================
+Slack (ps):                    -2,139          -2,215          -1,908          -1,908
+  R2R (ps):                    -2,139          -2,215          -1,908          -1,908
+  I2R (ps):                      -276          -1,110            -720            -720
+  R2O (ps):                       320             150             137             137
+  I2O (ps):                  no_value        no_value        no_value        no_value
+  CG  (ps):                  no_value        no_value        no_value        no_value
+TNS (ps):                  -1,417,286      -2,206,566      -1,487,248      -1,487,248
+  R2R (ps):                -1,417,286      -2,192,312      -1,487,248      -1,487,248
+  I2R (ps):                   -12,169        -604,386         -84,394         -84,394
+  R2O (ps):                         0               0               0               0
+  I2O (ps):                  no_value        no_value        no_value        no_value
+  CG  (ps):                  no_value        no_value        no_value        no_value
+Failing Paths:                  3,077           4,823           3,613           3,613
+Cell Area:                    207,214         149,726         193,096         193,096
+Total Cell Area:              207,214         149,726         193,096         193,096
+Leaf Instances:                65,153          43,596          49,738          49,738
+Total Instances:               65,153          43,596          49,738          49,738
+Utilization (%):                 0.00            0.00            0.00            0.00
+Tot. Net Length (um):        no_value        no_value        no_value        no_value
+Avg. Net Length (um):        no_value        no_value        no_value        no_value
+Route Overflow H (%):        no_value        no_value        no_value        no_value
+Route Overflow V (%):        no_value        no_value        no_value        no_value
+MBCI(%) (bits/gate) :            0.00            0.00            0.00            0.00
+Norm Cong Hotspot Area:
+  Max Cong:                  no_value        no_value        no_value        no_value
+  Tot Cong:                  no_value        no_value        no_value        no_value
+==========================================================================================
+CPU  Runtime (h:m:s):        00:03:47        00:07:40        00:18:56        00:00:04
+Real Runtime (h:m:s):        00:02:32        00:02:55        00:18:00        00:00:05
+CPU  Elapsed (h:m:s):        00:03:51        00:11:32        00:30:28        00:30:32
+Real Elapsed (h:m:s):        00:02:35        00:05:30        00:23:30        00:23:35
+Memory (MB):                  1621.12         1621.86         1638.14         1675.98
+==========================================================================================
+==========================================================================================
+Flow Settings:
+==========================================================================================
+Total Runtime (h:m:s): 00:23:35
+Total Memory (MB):     1675.98
+Executable Version:    21.16-s062_1
+==========================================================================================
+Total Cell Area =  Cell Area + Physical Cell Area
+Total Instances =  Leaf Instances + Physical Instances
+
+
+final_area.rpt
+ Instance      Module      Cell Count  Cell Area  Net Area   Total Area 
+------------------------------------------------------------------------
+fpu_double                      49738 193095.936 59516.408   252612.344 
+  u2       fpu_sub               4513  17964.542  5665.025    23629.566 
+  u6       fpu_exceptions        1500   6333.994  1576.537     7910.531 
+final_power.rpt
+  -------------------------------------------------------------------------
+    Category         Leakage     Internal    Switching        Total    Row%
+  -------------------------------------------------------------------------
+      memory     0.00000e+00  0.00000e+00  0.00000e+00  0.00000e+00   0.00%
+    register     1.64850e-06  5.39755e-02  6.40998e-03  6.03871e-02  29.01%
+       latch     1.22503e-09  2.19664e-06  2.76069e-06  4.95856e-06   0.00%
+       logic     1.08237e-05  8.25486e-02  6.52004e-02  1.47760e-01  70.99%
+        bbox     0.00000e+00  0.00000e+00  0.00000e+00  0.00000e+00   0.00%
+       clock     0.00000e+00  0.00000e+00  0.00000e+00  0.00000e+00   0.00%
+         pad     0.00000e+00  0.00000e+00  0.00000e+00  0.00000e+00   0.00%
+          pm     0.00000e+00  0.00000e+00  0.00000e+00  0.00000e+00   0.00%
+  -------------------------------------------------------------------------
+    Subtotal     1.24734e-05  1.36526e-01  7.16132e-02  2.08152e-01 100.00%
+  Percentage           0.01%       65.59%       34.40%      100.00% 100.00%
+  -------------------------------------------------------------------------
