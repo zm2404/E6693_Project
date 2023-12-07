@@ -1,0 +1,59 @@
+==========================================================================================
+Metric                          generic         map             syn_opt         final          
+==========================================================================================
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                    338             936             281             281
+Failing Paths:                     60             140               0               0
+Failing Paths:                      0               0               0               0
+Failing Paths:                      0               0               0               0
+
+
+Failing Paths:                  3,077           3,671           2,516           2,516
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,816           3,236           3,236
+Failing Paths:                  3,077           4,988           3,206           3,206
+Failing Paths:                  3,077           5,002           2,886           2,886
+
+
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+
+
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,076           4,849           2,746           2,746
+Failing Paths:                  3,075           4,698           3,153           3,153
+Failing Paths:                  3,077           4,823           3,613           3,613
+Failing Paths:                  3,012           4,557           3,466           3,466
+
+
+Failing Paths:                  3,078           4,287           2,501           2,501
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,071           5,119           3,304           3,304
+Failing Paths:                  3,318           5,041           4,009           4,009
+Failing Paths:                  5,037           5,102           5,079           5,079
+
+
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+
+
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,147           4,986           2,709           2,709
+Failing Paths:                  3,147           4,985           2,781           2,781
+
+
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+Failing Paths:                  3,077           4,917           2,809           2,809
+
+
