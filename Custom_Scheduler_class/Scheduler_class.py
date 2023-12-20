@@ -77,9 +77,6 @@ class Scheduler:
             print('Scheduler: ',sorted_server_list)
             if self.done_trials_num >= self.total_trials_num:
                 break
-            #await asyncio.sleep(1800)   # update every 30 minutes
-            #if self.done_trials_num >= self.total_trials_num:
-            #    break
 
 
     def get_multiple_load(self, username, password) -> dict:
@@ -97,8 +94,7 @@ class Scheduler:
                         target = 'cadpc' + str(i) + '.ee.columbia.edu'
                         raise Exception('Server 14 is not available.')
                     target = 'cadpc' + str(i) + '.ee.columbia.edu'
-                filename = 'load' + str(i) + '.txt'
-                load_info = self.get_single_load(username, password, target, filename)
+                load_info = self.get_single_load(username, password, target)
                 info[i] = self.weighted_load(load_info['load'], load_info['cpu'])
                 print('Scheduler: Done with ' + target)
             except:
@@ -107,11 +103,10 @@ class Scheduler:
         return info
     
 
-    def get_single_load(self, username, password, target, filename) -> dict:
+    def get_single_load(self, username, password, target) -> dict:
         '''
         This function is to get the load of the [target] server.
         It uses the paramiko library to ssh into the server and run the command 'top'.
-        It saves the output to a text file, file name is specified by [filename].
 
         The output is a dictionary with two keys: 'load' and 'cpu'.
         '''
@@ -134,16 +129,12 @@ class Scheduler:
                 info['load'] = lines[i].split('load average: ')[1].split(',')
             if 'Tasks' in lines[i]:
                 load_output.append(lines[i])
-            if '%CPU' in lines[i]:  # 这里只获取了一个cpu的用量，但是不一定只有一个人再用，所以要获取多个。那么获取几个呢？
+            if '%CPU' in lines[i]: 
                 load_output.append(lines[i])
                 load_output.append(lines[i+1])
                 info['cpu'] = lines[i+1].split()[8]
 
         load_output = '\n'.join(load_output)
-
-        # Save the output to a text file
-        with open(filedir+filename, 'w') as file:
-            file.write(load_output)
 
         ssh_client.close()
 
