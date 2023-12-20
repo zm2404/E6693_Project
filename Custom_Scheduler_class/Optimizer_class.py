@@ -1,6 +1,6 @@
 from bayes_opt import BayesianOptimization, UtilityFunction
 import asyncio
-from .Trial_class_demo import Trial
+from .Trial_class import Trial
 import os
 
 
@@ -45,7 +45,7 @@ class Optimizer:
         return sorted_initial_points
     
 
-    async def black_box_function(self, param, fileaddress, scheduler=None, pyfile='sample_cadence.py') -> tuple[float, dict]:
+    async def black_box_function(self, param, fileaddress, env_command, scheduler=None, pyfile='sample_cadence.py') -> tuple[float, dict]:
         '''
         define the black box function
         '''
@@ -53,7 +53,7 @@ class Optimizer:
         if scheduler is None:
             result = await trial.run()
         else:
-            result = await trial.run_remote(scheduler, pyfile=pyfile, fileaddress=fileaddress)
+            result = await trial.run_remote(scheduler, pyfile=pyfile, fileaddress=fileaddress, env_command=env_command)
 
         if result is None:
             self.done_trials_num += 1
@@ -68,7 +68,7 @@ class Optimizer:
         return result
 
 
-    async def optimization(self, fileaddress, initial_points:list=None, scheduler=None, pyfile:str='sample_cadence.py'):
+    async def optimization(self, fileaddress, env_command:str='', initial_points:list=None, scheduler=None, pyfile:str='sample_cadence.py'):
         '''
         fileaddress:        the root address of the pyfile
         initial_points:     the initial points we want to use
@@ -95,7 +95,7 @@ class Optimizer:
 
         for param in initial_points:
             print('Optimizer: ',param)
-        trials = [asyncio.create_task(self.black_box_function(param=param, fileaddress=fileaddress, scheduler=scheduler, pyfile=pyfile)) for param in initial_points]
+        trials = [asyncio.create_task(self.black_box_function(param=param, fileaddress=fileaddress, env_command=env_command, scheduler=scheduler, pyfile=pyfile)) for param in initial_points]
 
         while self.done_trials_num < self.total_trials_num:
             done, _ = await asyncio.wait(trials, return_when=asyncio.FIRST_COMPLETED)
@@ -114,11 +114,14 @@ class Optimizer:
                     next_point = optimizer.suggest(utility)
                     sorted_next_point = {key: next_point[key] for key in self._input_key_order}
                     sorted_next_point['trial_index'] = self.gend_trials_num
-                    new_task = asyncio.create_task(self.black_box_function(param=sorted_next_point, fileaddress=fileaddress, scheduler=scheduler, pyfile=pyfile))
+                    new_task = asyncio.create_task(self.black_box_function(param=sorted_next_point, fileaddress=fileaddress, env_command=env_command, scheduler=scheduler, pyfile=pyfile))
                     self.gend_trials_num += 1
                     trials.append(new_task)
                 
                 trials.remove(task)
 
         print('Optimization finished.')
-        print("Best result: {}; f(x) = {:.3f}.".format(optimizer.max["params"], optimizer.max["target"]))
+        print("Best result: {}; f(x) = {:.3f}.".format(optimizer.max["params"], -1*optimizer.max["target"]))
+
+        with open (f'{fileaddress}/results/optimizer_results.txt','w') as f:
+            f.write(f'Best result: {optimizer.max["params"]}; f(x) = {-1*optimizer.max["target"]}.')

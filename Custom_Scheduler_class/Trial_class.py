@@ -30,12 +30,11 @@ class Trial:
             return self.result, {"alpha":self.alpha,"beta":self.beta}
     
 
-    async def run_remote(self, scheduler, pyfile, fileaddress) -> tuple[dict, dict]:
+    async def run_remote(self, scheduler, pyfile, fileaddress, env_command='') -> tuple[dict, dict]:
         '''
         This function run the commend on remote machine.
         '''
         args = ' '.join(f'--{key} {value}' for key, value in self.param.items())
-        #command = f"python3 /user/stud/fall22/zm2404/E6693/project/{pyfile} {args} --index {self.trial_index}"
         command = f"python3 {fileaddress}/{pyfile} {args} --index {self.trial_index}"
         print('Trial: ',command)
 
@@ -49,7 +48,8 @@ class Trial:
             # connect to the server
             try:
                 async with asyncssh.connect(host = target, username = scheduler.username, password = scheduler.password, known_hosts=None) as conn:
-                    command = "source '/courses/ee6693/code/python/miniconda3/bin/activate' 'adam_env' && " + command
+                    #command = "source '/courses/ee6693/code/python/miniconda3/bin/activate' 'adam_env' && " + command
+                    command = env_command + ' && ' + command
                     result = await conn.run(command, check=True)
                     #print(result.stderr.strip())
                     #print(f'Trial: {target}: {result.stdout.strip()}', f'{self.param}')
