@@ -1,0 +1,51 @@
+
+
+Working Directory = /homes/user/stud/fall22/zm2404/E6693/project/DA1_38
+QoS Summary for fpu_double
+==========================================================================================
+Metric                          generic         map             syn_opt         final          
+==========================================================================================
+Slack (ps):                      -117            -161               0               0
+  R2R (ps):                      -117            -161               0               0
+  I2R (ps):                  no_value        no_value        no_value        no_value
+  R2O (ps):                     1,741           1,727           1,727           1,727
+  I2O (ps):                  no_value        no_value        no_value        no_value
+  CG  (ps):                  no_value        no_value        no_value        no_value
+TNS (ps):                      -4,723         -16,956               0               0
+  R2R (ps):                    -4,723         -16,956               0               0
+  I2R (ps):                  no_value        no_value        no_value        no_value
+  R2O (ps):                         0               0               0               0
+  I2O (ps):                  no_value        no_value        no_value        no_value
+  CG  (ps):                  no_value        no_value        no_value        no_value
+Failing Paths:                     54             154               0               0
+Cell Area:                    194,783         112,598         107,968         107,968
+Total Cell Area:              194,783         112,598         107,968         107,968
+Leaf Instances:                60,324          35,520          34,710          34,710
+Total Instances:               60,324          35,520          34,710          34,710
+Utilization (%):                 0.00            0.00            0.00            0.00
+Tot. Net Length (um):        no_value        no_value        no_value        no_value
+Avg. Net Length (um):        no_value        no_value        no_value        no_value
+Route Overflow H (%):        no_value        no_value        no_value        no_value
+Route Overflow V (%):        no_value        no_value        no_value        no_value
+MBCI(%) (bits/gate) :            0.00            0.00            0.00            0.00
+Norm Cong Hotspot Area:
+  Max Cong:                  no_value        no_value        no_value        no_value
+  Tot Cong:                  no_value        no_value        no_value        no_value
+==========================================================================================
+CPU  Runtime (h:m:s):        00:06:38        00:11:59        00:04:22        00:00:02
+Real Runtime (h:m:s):        00:09:05        00:05:15        00:04:08        00:00:03
+CPU  Elapsed (h:m:s):        00:06:46        00:18:44        00:23:05        00:23:07
+Real Elapsed (h:m:s):        00:09:13        00:14:25        00:18:32        00:18:35
+Memory (MB):                  1614.29         1614.04         1606.85         1647.70
+==========================================================================================
+==========================================================================================
+Flow Settings:
+==========================================================================================
+Total Runtime (h:m:s): 00:18:33
+Total Memory (MB):     1647.70
+Executable Version:    21.16-s062_1
+==========================================================================================
+Total Cell Area =  Cell Area + Physical Cell Area
+Total Instances =  Leaf Instances + Physical Instances
+
+
