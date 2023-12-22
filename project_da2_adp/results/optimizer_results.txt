@@ -1,0 +1,1 @@
+Best result: {'clk_tran_coef': 0.2764038272303056, 'input_delay_coef': 0.3025733555876178, 'max_tran_coef': 0.2385278449472471, 'output_delay_coef': 0.4217978292614951}; f(x) = 25884772.13.
