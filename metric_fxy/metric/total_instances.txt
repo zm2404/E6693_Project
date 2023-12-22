@@ -1,0 +1,59 @@
+==========================================================================================
+Metric                          generic         map             syn_opt         final          
+==========================================================================================
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               60,654          38,601          46,232          46,232
+Total Instances:               60,270          36,236          35,610          35,610
+Total Instances:               58,401          30,737          29,504          29,504
+Total Instances:               58,249          30,126          28,890          28,890
+
+
+Total Instances:               65,154          50,635          59,653          59,653
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          41,198          47,193          47,193
+Total Instances:               65,154          42,718          47,822          47,822
+Total Instances:               65,154          42,773          47,758          47,758
+
+
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+
+
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,208          42,870          48,102          48,102
+Total Instances:               65,169          42,143          47,574          47,574
+Total Instances:               65,153          43,596          49,738          49,738
+Total Instances:               65,150          44,648          48,599          48,599
+
+
+Total Instances:               65,162          42,407          47,749          47,749
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,157          42,173          48,242          48,242
+Total Instances:               66,219          42,577          45,761          45,761
+Total Instances:               70,365          41,380          46,275          46,275
+
+
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+
+
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          45,614          45,614
+Total Instances:               65,154          42,370          47,695          47,695
+
+
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+Total Instances:               65,154          42,466          46,041          46,041
+
+
